@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Tracker Allenamento</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <!-- Apple Web App Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <!-- Header / Barra Superiore -->
+    <header>
+        <div class="logo">🏋️‍♂️ FitTrack</div>
+        <div class="subtitle">I tuoi dati, 100% offline</div>
+    </header>
+
+    <main class="container">
+        <!-- Pannello Timer e Stato -->
+        <section class="card timer-card">
+            <div class="timer-display" id="timerDisplay">00:00</div>
+            <div class="timer-controls">
+                <button id="btnTimerToggle" class="btn btn-primary">Avvia Recupero</button>
+                <button id="btnTimerReset" class="btn btn-secondary">Reset</button>
+            </div>
+        </section>
+
+        <!-- Form Inserimento Esercizio -->
+        <section class="card form-card">
+            <h2>Registra Serie</h2>
+            <form id="workoutForm">
+                <div class="form-group">
+                    <label for="exerciseSelect">Esercizio</label>
+                    <select id="exerciseSelect" required>
+                        <option value="Panca Piana">🏋️ Panca Piana</option>
+                        <option value="Squat">🦵 Squat</option>
+                        <option value="Trazioni">💪 Trazioni sbarra</option>
+                        <option value="Stacco da terra">🔥 Stacco da terra</option>
+                        <option value="Curl Bicipiti">💪 Curl Bicipiti</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="weightInput">Peso (Kg)</label>
+                        <input type="number" id="weightInput" min="0" step="0.5" placeholder="es. 60" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="repsInput">Ripetizioni</label>
+                        <input type="number" id="repsInput" min="0" placeholder="es. 10" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">Salva Serie</button>
+            </form>
+        </section>
+
+        <!-- Lista Allenamento del Giorno -->
+        <section class="card list-card">
+            <div class="list-header">
+                <h2>Sessione Odierna</h2>
+                <button id="btnClearHistory" class="btn btn-danger-text">Svuota Tutto</button>
+            </div>
+            <div id="emptyState" class="empty-state">
+                Nessuna serie registrata oggi. Inizia ad allenarti!
+            </div>
+            <ul class="workout-list" id="workoutList">
+                <!-- Inserito dinamicamente via JS -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- Notifica di installazione / Stato PWA -->
+    <div id="pwaToast" class="pwa-toast hidden">
+        <span>App pronta per l'uso offline!</span>
+        <button id="closeToast">OK</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
