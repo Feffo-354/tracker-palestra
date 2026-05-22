@@ -1,7 +1,7 @@
 {
-  "name": "FitTrack Tracker Allenamento",
-  "short_name": "FitTrack",
-  "description": "Un tracker di allenamento leggero, veloce e focalizzato sulla privacy che funziona totalmente offline.",
+  "name": "FitTrack Pro Tracker Allenamento",
+  "short_name": "FitTrackPro",
+  "description": "Un tracker di allenamento PWA avanzato con esercizi personalizzati, tempi di recupero e notifiche push native.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",

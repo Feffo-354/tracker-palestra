@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittrack-v1';
+const CACHE_NAME = 'fittrack-pro-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -9,24 +9,20 @@ const ASSETS = [
   './icon-512.png'
 ];
 
-// Fase di installazione: mettiamo in cache l'interfaccia dell'app (App Shell)
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Service Worker: Salvataggio file statici in cache...');
       return cache.addAll(ASSETS);
     }).then(() => self.skipWaiting())
   );
 });
 
-// Fase di attivazione: pulizia vecchie cache
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
-            console.log('Service Worker: Cancellazione vecchia cache', cache);
             return caches.delete(cache);
           }
         })
@@ -35,17 +31,23 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Intercettazione delle richieste di rete (Strategia: Cache First, fallback su Network)
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse; // Ritorna il file dalla cache immediatamente
+      return cachedResponse || fetch(e.request);
+    })
+  );
+});
+
+// Ascolta gli eventi di notifica in background (opzionale per estensioni future)
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  e.waitUntil(
+    clients.matchAll({ type: 'window' }).then((clientList) => {
+      if (clientList.length > 0) {
+        return clientList[0].focus();
       }
-      return fetch(e.request).catch(() => {
-        // Opzione di fallback se offline totale e risorsa non in cache
-        console.log('Risorsa non trovata offline');
-      });
+      return clients.openWindow('./');
     })
   );
 });

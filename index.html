@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitTrack - Tracker Allenamento</title>
+    <title>FitTrack Pro - Tracker Allenamento</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -15,14 +15,28 @@
 
     <!-- Header / Barra Superiore -->
     <header>
-        <div class="logo">🏋️‍♂️ FitTrack</div>
-        <div class="subtitle">I tuoi dati, 100% offline</div>
+        <div class="logo">🏋️‍♂️ FitTrack Pro</div>
+        <div class="subtitle">Personalizzazione & Notifiche Native</div>
     </header>
 
     <main class="container">
         <!-- Pannello Timer e Stato -->
         <section class="card timer-card">
-            <div class="timer-display" id="timerDisplay">00:00</div>
+            <div class="timer-header">
+                <h2>Timer di Recupero</h2>
+                <button id="btnRequestNotif" class="btn btn-small btn-secondary">🔔 Attiva Notifiche</button>
+            </div>
+            <div class="timer-display" id="timerDisplay">01:30</div>
+            
+            <!-- Setup Recupero Personalizzato -->
+            <div class="custom-timer-setup">
+                <label for="customTimerInput">Recupero predefinito per il prossimo esercizio:</label>
+                <div class="input-append">
+                    <input type="number" id="customTimerInput" min="5" max="600" value="90" placeholder="Secondi">
+                    <button id="btnSetCustomTimer" class="btn btn-secondary">Imposta</button>
+                </div>
+            </div>
+
             <div class="timer-controls">
                 <button id="btnTimerToggle" class="btn btn-primary">Avvia Recupero</button>
                 <button id="btnTimerReset" class="btn btn-secondary">Reset</button>
@@ -35,13 +49,14 @@
             <form id="workoutForm">
                 <div class="form-group">
                     <label for="exerciseSelect">Esercizio</label>
-                    <select id="exerciseSelect" required>
-                        <option value="Panca Piana">🏋️ Panca Piana</option>
-                        <option value="Squat">🦵 Squat</option>
-                        <option value="Trazioni">💪 Trazioni sbarra</option>
-                        <option value="Stacco da terra">🔥 Stacco da terra</option>
-                        <option value="Curl Bicipiti">💪 Curl Bicipiti</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select id="exerciseSelect" required>
+                            <option value="Panca Piana">🏋️ Panca Piana</option>
+                            <option value="Squat">🦵 Squat</option>
+                            <option value="Trazioni">💪 Trazioni sbarra</option>
+                            <option value="Stacco da terra">🔥 Stacco da terra</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -55,8 +70,20 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success btn-block">Salva Serie</button>
+                <button type="submit" class="btn btn-success btn-block">Salva Serie & Riposa</button>
             </form>
+        </section>
+
+        <!-- Gestione ed Inserimento Nuovi Esercizi Personali -->
+        <section class="card custom-exercise-card">
+            <h2>Aggiungi Nuovo Tipo di Esercizio</h2>
+            <div class="form-group">
+                <label for="newExerciseInput">Nome Esercizio</label>
+                <div class="input-append">
+                    <input type="text" id="newExerciseInput" placeholder="es. Leg Press, Shoulder Press...">
+                    <button id="btnAddExercise" class="btn btn-primary">Aggiungi</button>
+                </div>
+            </div>
         </section>
 
         <!-- Lista Allenamento del Giorno -->
@@ -76,7 +103,7 @@
 
     <!-- Notifica di installazione / Stato PWA -->
     <div id="pwaToast" class="pwa-toast hidden">
-        <span>App pronta per l'uso offline!</span>
+        <span id="toastMessage">App pronta per l'uso offline!</span>
         <button id="closeToast">OK</button>
     </div>
 

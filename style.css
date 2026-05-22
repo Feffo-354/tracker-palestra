@@ -6,13 +6,13 @@
 }
 
 body {
-    background-color: #0f172a; /* Slate 900 - Tema scuro per palestre */
+    background-color: #0f172a;
     color: #f8fafc;
     padding-bottom: 30px;
 }
 
 header {
-    background-color: #1e293b; /* Slate 800 */
+    background-color: #1e293b;
     padding: 20px 15px;
     text-align: center;
     border-bottom: 1px solid #334155;
@@ -21,7 +21,7 @@ header {
 header .logo {
     font-size: 24px;
     font-weight: 800;
-    color: #38bdf8; /* Light Blue */
+    color: #38bdf8;
     letter-spacing: 0.5px;
 }
 
@@ -43,29 +43,60 @@ header .subtitle {
     padding: 20px;
     margin-bottom: 15px;
     border: 1px solid #334155;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: #f1f5f9;
 }
 
 /* Timer */
 .timer-card {
-    text-align: center;
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
+.timer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.timer-header h2 { margin-bottom: 0; }
+
 .timer-display {
-    font-size: 48px;
+    font-size: 44px;
     font-weight: 700;
     font-family: monospace;
     color: #38bdf8;
-    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 12px;
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.custom-timer-setup {
+    background-color: rgba(15, 23, 42, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #334155;
+}
+
+.custom-timer-setup label {
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.input-append {
+    display: flex;
+    gap: 8px;
+}
+
+.input-append input {
+    flex: 1;
 }
 
 .timer-controls {
@@ -103,7 +134,7 @@ select, input {
     border: 1px solid #475569;
     border-radius: 8px;
     color: #f8fafc;
-    font-size: 16px; /* Impedisce lo zoom automatico su iOS */
+    font-size: 16px;
     outline: none;
     transition: border-color 0.2s;
 }
@@ -123,9 +154,7 @@ select:focus, input:focus {
     transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn:active {
-    transform: scale(0.98);
-}
+.btn:active { transform: scale(0.98); }
 
 .btn-primary { background-color: #38bdf8; color: #0f172a; }
 .btn-primary:hover { background-color: #7dd3fc; }
@@ -136,6 +165,12 @@ select:focus, input:focus {
 .btn-success { background-color: #10b981; color: #fff; }
 .btn-success:hover { background-color: #34d399; }
 
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
 .btn-block { width: 100%; }
 
 .btn-danger-text {
@@ -144,6 +179,8 @@ select:focus, input:focus {
     font-size: 13px;
     font-weight: 500;
     padding: 4px 8px;
+    border: none;
+    cursor: pointer;
 }
 
 /* Lista */
@@ -163,9 +200,7 @@ select:focus, input:focus {
     padding: 20px 0;
 }
 
-.workout-list {
-    list-style: none;
-}
+.workout-list { list-style: none; }
 
 .workout-item {
     background-color: #0f172a;
