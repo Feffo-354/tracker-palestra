@@ -1,7 +1,7 @@
 {
-  "name": "FitTrack Ultimate PWA",
-  "short_name": "FitTrackUltimate",
-  "description": "Tracker di allenamento offline completo con controllo notifiche avanzato, emoji personalizzabili e gestione recuperi in minuti e secondi.",
+  "name": "FitTrack Pro Tracker Allenamento",
+  "short_name": "FitTrackPro",
+  "description": "Un tracker di allenamento PWA avanzato con esercizi personalizzati, tempi di recupero e notifiche push native.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",
