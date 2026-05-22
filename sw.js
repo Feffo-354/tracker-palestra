@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittrack-pro-v2';
+const CACHE_NAME = 'fittrack-ultimate-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -35,19 +35,6 @@ self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
       return cachedResponse || fetch(e.request);
-    })
-  );
-});
-
-// Ascolta gli eventi di notifica in background (opzionale per estensioni future)
-self.addEventListener('notificationclick', (e) => {
-  e.notification.close();
-  e.waitUntil(
-    clients.matchAll({ type: 'window' }).then((clientList) => {
-      if (clientList.length > 0) {
-        return clientList[0].focus();
-      }
-      return clients.openWindow('./');
     })
   );
 });

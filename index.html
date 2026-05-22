@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitTrack Pro - Tracker Allenamento</title>
+    <title>FitTrack Ultimate - Tracker Allenamento</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -15,25 +15,34 @@
 
     <!-- Header / Barra Superiore -->
     <header>
-        <div class="logo">🏋️‍♂️ FitTrack Pro</div>
-        <div class="subtitle">Personalizzazione & Notifiche Native</div>
+        <div class="logo">🏋️‍♂️ FitTrack Ultimate</div>
+        <div class="subtitle">Personalizzazione Avanzata & Controllo Notifiche</div>
     </header>
 
     <main class="container">
         <!-- Pannello Timer e Stato -->
         <section class="card timer-card">
             <div class="timer-header">
-                <h2>Timer di Recupero</h2>
-                <button id="btnRequestNotif" class="btn btn-small btn-secondary">🔔 Attiva Notifiche</button>
+                <h2>⏰ Timer di Recupero</h2>
+                <div class="notif-badge-container">
+                    <span id="notifStatusBadge" class="badge badge-warn">Notifiche Inattive</span>
+                </div>
             </div>
             <div class="timer-display" id="timerDisplay">01:30</div>
             
-            <!-- Setup Recupero Personalizzato -->
+            <!-- Setup Recupero Personalizzato in Minuti e Secondi -->
             <div class="custom-timer-setup">
-                <label for="customTimerInput">Recupero predefinito per il prossimo esercizio:</label>
-                <div class="input-append">
-                    <input type="number" id="customTimerInput" min="5" max="600" value="90" placeholder="Secondi">
-                    <button id="btnSetCustomTimer" class="btn btn-secondary">Imposta</button>
+                <label>Imposta recupero predefinito:</label>
+                <div class="timer-input-row">
+                    <div class="input-field-group">
+                        <input type="number" id="timerMinInput" min="0" max="10" value="1" placeholder="Min">
+                        <span>Minuti</span>
+                    </div>
+                    <div class="input-field-group">
+                        <input type="number" id="timerSecInput" min="0" max="59" value="30" placeholder="Sec">
+                        <span>Secondi</span>
+                    </div>
+                    <button id="btnSetCustomTimer" class="btn btn-secondary">Applica</button>
                 </div>
             </div>
 
@@ -43,18 +52,47 @@
             </div>
         </section>
 
+        <!-- Pannello di Controllo Gestione Notifiche -->
+        <section class="card settings-card">
+            <h2>⚙️ Gestione Avvisi e Notifiche</h2>
+            <p class="settings-desc">Scegli come l'app deve avvisarti al termine del recupero (anche a schermo bloccato):</p>
+            
+            <div class="settings-options">
+                <div class="toggle-group">
+                    <label class="switch-container">
+                        <input type="checkbox" id="togglePushNotif">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="toggle-text">
+                        <span class="toggle-title">Notifiche Push di Sistema</span>
+                        <span class="toggle-subtitle">Invia un banner nativo sullo schermo del telefono</span>
+                    </div>
+                </div>
+
+                <div class="toggle-group">
+                    <label class="switch-container">
+                        <input type="checkbox" id="toggleAudioNotif" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="toggle-text">
+                        <span class="toggle-title">Suono Acustico (Beep)</span>
+                        <span class="toggle-subtitle">Riproduce un segnale sonoro via Web Audio API</span>
+                    </div>
+                </div>
+                
+                <button id="btnTestNotif" class="btn btn-secondary btn-small btn-block-mobile">🔔 Fai un test di avviso</button>
+            </div>
+        </section>
+
         <!-- Form Inserimento Esercizio -->
         <section class="card form-card">
-            <h2>Registra Serie</h2>
+            <h2>📝 Registra Serie</h2>
             <form id="workoutForm">
                 <div class="form-group">
-                    <label for="exerciseSelect">Esercizio</label>
+                    <label for="exerciseSelect">Scegli Esercizio</label>
                     <div class="select-wrapper">
                         <select id="exerciseSelect" required>
-                            <option value="Panca Piana">🏋️ Panca Piana</option>
-                            <option value="Squat">🦵 Squat</option>
-                            <option value="Trazioni">💪 Trazioni sbarra</option>
-                            <option value="Stacco da terra">🔥 Stacco da terra</option>
+                            <!-- Popolato dinamicamente con emoji -->
                         </select>
                     </div>
                 </div>
@@ -76,7 +114,20 @@
 
         <!-- Gestione ed Inserimento Nuovi Esercizi Personali -->
         <section class="card custom-exercise-card">
-            <h2>Aggiungi Nuovo Tipo di Esercizio</h2>
+            <h2>✨ Aggiungi Nuovo Esercizio Personalizzato</h2>
+            <div class="form-group">
+                <label for="newExerciseEmoji">Scegli Emoji</label>
+                <select id="newExerciseEmoji" class="emoji-select">
+                    <option value="🏋️">🏋️ Bilanciere</option>
+                    <option value="💪">💪 Muscoli / Bicipiti</option>
+                    <option value="🦵">🦵 Gambe / Squat</option>
+                    <option value="🔥">🔥 Core / Stacco</option>
+                    <option value="🏃">🏃 Cardio / Corsa</option>
+                    <option value="🤸">🤸 Corpo Libero</option>
+                    <option value="🧗">🧗 Trazioni / Dorsali</option>
+                    <option value="🎯">🎯 Definizione / Altro</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="newExerciseInput">Nome Esercizio</label>
                 <div class="input-append">
@@ -89,7 +140,7 @@
         <!-- Lista Allenamento del Giorno -->
         <section class="card list-card">
             <div class="list-header">
-                <h2>Sessione Odierna</h2>
+                <h2>📊 Sessione Odierna</h2>
                 <button id="btnClearHistory" class="btn btn-danger-text">Svuota Tutto</button>
             </div>
             <div id="emptyState" class="empty-state">

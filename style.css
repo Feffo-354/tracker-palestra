@@ -47,13 +47,23 @@ header .subtitle {
 }
 
 h2 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 12px;
     color: #f1f5f9;
 }
 
-/* Timer */
+/* Badges e Stati */
+.badge {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+.badge-warn { background-color: #b45309; color: #fef3c7; }
+.badge-success { background-color: #065f46; color: #d1fae5; }
+
+/* Timer in minuti e secondi */
 .timer-card {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
@@ -68,7 +78,7 @@ h2 {
 .timer-header h2 { margin-bottom: 0; }
 
 .timer-display {
-    font-size: 44px;
+    font-size: 48px;
     font-weight: 700;
     font-family: monospace;
     color: #38bdf8;
@@ -79,25 +89,48 @@ h2 {
 
 .custom-timer-setup {
     background-color: rgba(15, 23, 42, 0.6);
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     margin-bottom: 15px;
     border: 1px solid #334155;
 }
 
 .custom-timer-setup label {
-    font-size: 11px;
-    margin-bottom: 4px;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.timer-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-field-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-field-group input {
+    text-align: center;
+    padding: 8px;
+}
+
+.input-field-group span {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 3px;
 }
 
 .input-append {
     display: flex;
     gap: 8px;
+    width: 100%;
 }
 
-.input-append input {
-    flex: 1;
-}
+.input-append input { flex: 1; }
 
 .timer-controls {
     display: flex;
@@ -105,19 +138,85 @@ h2 {
     gap: 10px;
 }
 
-/* Form */
-.form-group {
+/* Gestione Notifiche (Settings Switcher) */
+.settings-desc {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #334155;
+    margin-bottom: 10px;
+}
+
+.toggle-group:last-of-type {
+    border-bottom: none;
     margin-bottom: 15px;
 }
 
-.form-row {
+.toggle-text {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
 }
 
-.form-row .form-group {
-    flex: 1;
+.toggle-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f1f5f9;
 }
+
+.toggle-subtitle {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* Toggle Switch standard CSS */
+.switch-container {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.switch-container input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #475569;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider { background-color: #10b981; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* Form inputs */
+.form-group { margin-bottom: 15px; }
+.form-row { display: flex; gap: 15px; }
+.form-row .form-group { flex: 1; }
 
 label {
     display: block;
@@ -139,9 +238,8 @@ select, input {
     transition: border-color 0.2s;
 }
 
-select:focus, input:focus {
-    border-color: #38bdf8;
-}
+select:focus, input:focus { border-color: #38bdf8; }
+.emoji-select { padding: 10px; }
 
 /* Bottoni */
 .btn {
@@ -155,23 +253,18 @@ select:focus, input:focus {
 }
 
 .btn:active { transform: scale(0.98); }
-
 .btn-primary { background-color: #38bdf8; color: #0f172a; }
 .btn-primary:hover { background-color: #7dd3fc; }
-
 .btn-secondary { background-color: #475569; color: #f8fafc; }
 .btn-secondary:hover { background-color: #64748b; }
-
 .btn-success { background-color: #10b981; color: #fff; }
 .btn-success:hover { background-color: #34d399; }
-
-.btn-small {
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 6px;
-}
-
+.btn-small { padding: 8px 14px; font-size: 12px; border-radius: 6px; }
 .btn-block { width: 100%; }
+
+@media (max-width: 400px) {
+    .btn-block-mobile { width: 100%; }
+}
 
 .btn-danger-text {
     background: none;
@@ -183,23 +276,15 @@ select:focus, input:focus {
     cursor: pointer;
 }
 
-/* Lista */
+/* Lista degli elementi salvati */
 .list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
-
 .list-header h2 { margin-bottom: 0; }
-
-.empty-state {
-    color: #64748b;
-    text-align: center;
-    font-size: 14px;
-    padding: 20px 0;
-}
-
+.empty-state { color: #64748b; text-align: center; font-size: 14px; padding: 20px 0; }
 .workout-list { list-style: none; }
 
 .workout-item {
