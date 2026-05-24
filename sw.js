@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fittrack-pro-v2';
+const CACHE_NAME = 'fittrack-pro-v3'; // Incrementata per aggiornare la cache dell'utente
 const ASSETS = [
   './',
   './index.html',
@@ -39,7 +39,6 @@ self.addEventListener('fetch', (e) => {
   );
 });
 
-// Ascolta gli eventi di notifica in background (opzionale per estensioni future)
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
   e.waitUntil(

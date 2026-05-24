@@ -15,8 +15,15 @@
 
     <!-- Header / Barra Superiore -->
     <header>
-        <div class="logo">🏋️‍♂️ FitTrack Pro</div>
-        <div class="subtitle">Personalizzazione & Notifiche Native</div>
+        <div class="header-container">
+            <div class="header-dummy"></div>
+            <div class="header-title">
+                <div class="logo">🏋️‍♂️ FitTrack Pro</div>
+                <div class="subtitle">Personalizzazione & Notifiche Native</div>
+            </div>
+            <!-- Bottone Impostazioni (Ingranaggio) -->
+            <button id="btnOpenSettings" class="btn-icon" aria-label="Impostazioni">⚙️</button>
+        </div>
     </header>
 
     <main class="container">
@@ -100,6 +107,28 @@
             </ul>
         </section>
     </main>
+
+    <!-- Modal Impostazioni -->
+    <div id="settingsModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Impostazioni Suono</h2>
+                <button id="btnCloseSettings" class="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="soundSelect">Seleziona Suono Notifica:</label>
+                    <select id="soundSelect">
+                        <option value="default">🔊 Classico (Default)</option>
+                        <option value="double">🔊 Bip Rapido Doppio</option>
+                        <option value="alarm">⏰ Sveglia Intensa</option>
+                        <option value="chime">🎵 Plinn (Ascensore)</option>
+                    </select>
+                </div>
+                <button id="btnTestSound" class="btn btn-secondary btn-block" style="margin-top: 10px;">Ascolta Anteprima</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Notifica di installazione / Stato PWA -->
     <div id="pwaToast" class="pwa-toast hidden">
